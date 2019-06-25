@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\input{macros}
+
+\input{glossary}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\normalsize}}
+\makeatother
+
+\title{Empowering Spreadsheet Users with Probabilistic Programming, Lecture 1}
+\author{Lecturer: Andrew D. Gordon}
+\date{June 24 2019}
+
+
+\newtheorem{example}{Example}[section]
+
+\begin{document}
+
+\maketitle
+
+\section{Probabilistic Programming}
+\sno{}
+Probabilistic programming is an inter-paradigm style of programming in which users
+\begin{enumerate}
+\item invokes randomness for probabilistic behavior,
+\item add {\bf constraints} to condition on observed data, and
+\item indicate which variables' distributions are to be inferred.
+\end{enumerate}
+
+\sno{}
+This approach is both easier and more expressive than writing code for probabilistic behavior from scratch making it a popular choice for both academic and commercial \gls{PPL} (Probabilistic Programming Language) technologies (BUGS, Figaro, pcc, Church, Dimple, Hansei, STAN, Infer.NET/Fun, R2, Factorie, BLOG, ProbLog, Alchemy, Venture, Anglican, Wolfe, Hakaru, Edward…). The semantics of PPLs was pioneered by Kozen, Giry, Jones/Plotkin, Panangaden et al, Ramsey/Pfeffer.
+
+\input{data-enthused}
+
+\section{The Big 4 PPLs}
+\begin{enumerate}[label=\Roman*]
+    \item BUGS (1989)
+    \begin{enumerate}[label=\roman*]
+        \item Pioneering work in the field
+        \item Introduced the idea of expressing probabilistic models decoratively
+    \end{enumerate}
+    \item Infer.net (2004) \cite{Minka:18:InferNET}
+    \begin{enumerate}[label=\roman*]
+        \item Uses a message passing infrastructure
+        \item Based on BUGS
+    \end{enumerate}
+    \item Church (2007)
+    \begin{enumerate}[label=\roman*]
+        \item Turing complete (general purpose)
+        \item A superset of lisp
+    \end{enumerate}
+    \item Stan (2017)
+    \begin{enumerate}[label=\roman*]
+        \item Started as a dialect of BUGS
+    \end{enumerate}
+\end{enumerate}
+
+
+\begin{example}
+Two coins are flipped in secret. It is guaranteed that they are not BOTH heads. What is the probability that the first coin is heads?
+\end{example}
+
+This is a \LaTeX{} test.
+And it seems like it's working.
+
+\bibliography{prob-prog-refs}{}
+\bibliographystyle{plain}
+
+\clearpage
+ 
+\glsaddall
+\printglossaries
+
+\end{document}

@@ -1,0 +1,66 @@
+\usepackage{calc}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usepackage{environ,varwidth}
+
+\mdfdefinestyle{tight}{roundcorner=1.5pt,innerleftmargin=0.7pt,innerrightmargin=0.7pt,innertopmargin=1pt,innerbottommargin=1pt,backgroundcolor=gray!20}
+
+\newsavebox\MyTempBox
+\NewEnviron{tight}{%
+\savebox\MyTempBox{%
+\begin{varwidth}{\linewidth}
+\BODY
+\end{varwidth}}%
+\begin{minipage}{\dimexpr\wd\MyTempBox+2.5pt\relax}
+\begin{mdframed}[style=tight,userdefinedwidth=\dimexpr\wd\MyTempBox+2.5pt\relax]
+\BODY
+\end{mdframed}%
+\end{minipage}
+}%
+
+% \newcommand\sno[1]{\begin{tight}\scriptsize\bf #1\end{tight}}
+
+
+\newcommand{\fx}[2]{\texttt{=#1}(#2)}
+\newcommand{\fxSTR}[1]{\texttt{"#1"}}
+\newcommand{\fxref}[2]{\texttt{#1#2}}
+\newcommand{\fxrange}[4]{\fxref{#1}{#2}:\fxref{#3}{#4}}
+
+
+
+\newcounter{sno}
+\setcounter{sno}{0}
+% \newcommand\sno{\stepcounter{sno}$_$}
+
+\newif\ifsnocaption
+% \snocaptiontrue
+\snocaptionfalse
+
+\newcommand\sno[1]{\stepcounter{sno}\begin{tight}\scriptsize\bf {\thesno} {\ifsnocaption #1 \else {} \fi}\end{tight}}
+\newcommand\snp[1]{\sno{1}} % i sometimes typo p instead of o
+
+% \newcommand\sno[1]{}
+
+\newif\ifgood
+\goodfalse
+
+\newif\ifbad
+\badfalse
+
+
+\newif\ifexplode
+\explodefalse
+% \explodetrue
+
+\newcommand\good[1]{\ifgood {\color{olive} #1} \else {#1} \fi}
+
+\newcommand\bad[1]{\ifbad {\color{gray} #1} \else {} \fi}
+
+\newcommand\explode{\ifexplode {\clearpage} \else {} \fi}
+
+\newif\ifInlineNotes
+\InlineNotesfalse
+% \InlineNotestrue
+
+\newcommand\inlineNote[1]{\ifInlineNotes \hl{\tt #1} \else {} \fi}
