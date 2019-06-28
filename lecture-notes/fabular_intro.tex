@@ -1,0 +1,94 @@
+%%
+%% Author: breandan
+%% 6/28/19
+%%
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{lmodern}
+
+% Document
+\begin{document}
+\noindent
+\textbf{Probabilistic Programming: }\\\\
+%
+\begin{multiline}
+\fontseries{b}\selectfont
+\texttt{let } \alpha &= \mathcal N(0, s_{large}^2) \texttt{ in} \\
+\texttt{let } \beta &= \mathcal N(0, s_{large}^2) \texttt{ in} \\
+\texttt{let } \pi &= \mathcal N(1, \lambda_{small}) \texttt{ in} \\
+\big((\underbrace{\alpha, \beta}_{\normalfont \text{coefficients}}), [\underbrace{\texttt{ for } z < \texttt{students} \rightarrow \alpha + x[z] \times \beta + \mathcal N(0, \frac{1}{\pi})}_{\normalfont \text{predicted values of the y variable}}]\big)
+\end{multiline} \\\\
+%
+\textbf{A regression calculus $y \sim r$:} \\\\
+%
+\begin{multiline}
+r::= \\
+    \indent D(v_1, \ldots, v_n) \\
+    \indent v\{\alpha \sim r\} \\
+    \indent r + r' \\
+    \indent r \mid r' \\
+    \indent (v \alpha)r\\\\
+u, v ::= \\
+    \indent s \\
+    \indent x \\
+    \indent u : v
+\end{multiline} \\\\
+%
+\textbf{Pure Intercept:} \\\\
+%
+\begin{multiline}
+\fontseries{b}\selectfont
+y \sim 1\{\alpha\} \sim \mathcal N(0, s_{large}^2) \\
+\texttt{let } \alpha &= \mathcal N(0, s_{large}^2) \texttt{ in} \\
+\big(\alpha, [\texttt{ for } z < \texttt{students} \rightarrow 1 \times \alpha ] \big) \\\\
+v\{\alpha\} \triangleq v\{\alpha \sim \mathcal N(0, s_{large}^2)\} \\
+v \triangleq (v\alpha)v\{\alpha\} \text{ for } \alpha \notin fv(v)
+\end{multiline} \\\\
+%
+\textbf{Pure Noise:} \\\\
+%
+\begin{multiline}
+    \fontseries{b}\selectfont
+    y \sim ? \\
+    \texttt{let } \pi &= \mathcal N(1, \lambda_{small}) \texttt{ in} \\
+    \big((), [\texttt{ for } z < \texttt{students} \rightarrow \mathcal N(0, \frac{1}{\pi}) ] \big) \\\\
+\end{multiline} \\\\
+%
+\textbf{Intercept with Noise:} \\\\
+%
+ \begin{multiline}
+    \fontseries{b}\selectfont
+    y \sim 1\{\alpha\} + ? \\
+    \texttt{let } \alpha &= \mathcal N(0, \lambda_{small}) \texttt{ in} \\
+    \texttt{let } \pi &= \mathcal N(1, \lambda_{small}) \texttt{ in} \\
+    \big((\alpha), [\texttt{ for } z < \texttt{students} \rightarrow \alpha + \mathcal N(0, \frac{1}{\pi}) ] \big) \\\\
+\end{multiline}
+%
+\textbf{Slope and intercept:} \\\\
+%
+\begin{multiline}
+    \fontseries{b}\selectfont
+    y \sim 1\{\alpha\} + x\{\beta\} + ? \\
+    \texttt{let } \alpha &= \mathcal N(0, \s_{large}^2) \texttt{ in} \\
+    \texttt{let } \beta &= \mathcal N(0, \s_{large}^2) \texttt{ in} \\
+    \texttt{let } \pi &= \mathcal N(1, \lambda_{small}) \texttt{ in} \\
+    \big((\alpha), [\texttt{ for } z < \texttt{students} \rightarrow \alpha + x\[z\] \times \beta + \mathcal N(0, \frac{1}{\pi}) ] \big) \\\\
+\end{multiline}
+%
+\textbf{Intercept per School:} \\\\
+%
+\begin{multiline}
+    \fontseries{b}\selectfont
+    y \sim (1\{\alpha\} \mid s) \\
+    \texttt{let } \alpha &= [\texttt{for } z < \texttt{schools} \rightarrow \mathcal N(0, s_{large}^2)] \texttt{ in} \\
+    \texttt{let } \pi &= \mathcal N(1, \lambda_{small}) \texttt{ in} \\
+    \big((\alpha), [\texttt{ for } z < \texttt{students} \rightarrow \alpha[s[z]] + \mathcal N(0, \frac{1}{\pi}) ] \big) \\\\
+\end{multiline} \\\\
+%
+\end{document}
